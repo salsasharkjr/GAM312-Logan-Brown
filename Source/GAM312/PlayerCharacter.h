@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Camera/CameraComponent.h"
+#include "Resource_M.h"
+#include "Kismet/GameplayStatics.h"
 #include "PlayerCharacter.generated.h"
 
 UCLASS()
@@ -45,5 +47,63 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* PlayerCamComp;
+
+
+
+	// SETS DEFAULT HEALTH AT 100
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
+	float Health = 100.0f;
+
+	// SET DEFAULT HUNGER AT 100
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
+	float Hunger = 100.0f;
+
+	// SET DEFAULT STAMINA AT 100
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
+	float Stamina = 100.0f;
+
+
+	// CREATES RESOURCE INTEGERS
+	UPROPERTY(EditAnywhere, Category = "Resources")
+	int Wood;
+
+	UPROPERTY(EditAnywhere, Category = "Resources")
+	int Stone;
+
+	UPROPERTY(EditAnywhere, Category = "Resources")
+	int Berry;
+
+	// CREATES ARRAY
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
+	TArray<int> ResourcesArray;
+
+	// ADDS NAMES TO ARRAY
+	UPROPERTY(EditAnywhere, Category = "Resources")
+	TArray<FString> ResourcesNameArray;
+
+	UPROPERTY(EditAnywhere, Category = "HitMarker")
+	UMaterialInterface* hitDecal;
+
+
+
+	// DECREASES HEALTH WITH TIMER
+	UFUNCTION(BlueprintCallable)
+	void SetHealth(float amount);
+
+	// DECREASES HUNGER WITH TIMER
+	UFUNCTION(BlueprintCallable)
+	void SetHunger(float amount);
+
+	// DECREASES STAMINA WITH TIMER
+	UFUNCTION(BlueprintCallable)
+	void SetStamina(float amount);
+
+	// TIMER TO DECREASE STAT AMOUNTS
+	UFUNCTION()
+	void DecreaseStats();
+
+	UFUNCTION()
+	void GiveResources(float amount, FString resourceType);
+
 
 };

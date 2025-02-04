@@ -7,7 +7,14 @@
 		{
 			"Name": "GAM312",
 			"Type": "Runtime",
+<<<<<<< HEAD
 			"LoadingPhase": "Default"
+=======
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+>>>>>>> e0158cb57564b56d491f39a9895896f445240d8a
 		}
 	],
 	"Plugins": [
