@@ -7,6 +7,7 @@
 #include "Camera/CameraComponent.h"
 #include "Resource_M.h"
 #include "Kismet/GameplayStatics.h"
+#include "BuildingPart.h"
 #include "PlayerCharacter.generated.h"
 
 UCLASS()
@@ -86,6 +87,26 @@ public:
 
 
 
+
+
+	// CREATE ARRAY FOR BUILDING SUPPLIES
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Supplies")
+	TArray<int> BuildingArray;
+
+	// BOOLEAN TO DETERMINE IF PLAYER IS ACTIVELY BUILDING
+	UPROPERTY()
+	bool isBuilding;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TSubclassOf<ABuildingPart> BuildPartClass;
+
+	UPROPERTY()
+	ABuildingPart* spawnedPart;
+
+
+
+
+
 	// DECREASES HEALTH WITH TIMER
 	UFUNCTION(BlueprintCallable)
 	void SetHealth(float amount);
@@ -106,4 +127,15 @@ public:
 	void GiveResources(float amount, FString resourceType);
 
 
+
+
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateResources(float woodAmount, float stoneAmount, FString buildingObject);
+
+	UFUNCTION(BlueprintCallable)
+	void SpawnBuilding(int buildingID, bool& isSuccess);
+
+	UFUNCTION()
+	void RotateBuilding();
 };
