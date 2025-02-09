@@ -12,7 +12,8 @@
 =======
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"Engine"
+				"Engine",
+				"UMG"
 			]
 >>>>>>> e0158cb57564b56d491f39a9895896f445240d8a
 		}
