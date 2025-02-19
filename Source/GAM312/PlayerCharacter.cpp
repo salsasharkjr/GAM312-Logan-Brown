@@ -37,6 +37,14 @@ void APlayerCharacter::BeginPlay()
 
 	FTimerHandle StatsTimerHandle;
 	GetWorld()->GetTimerManager().SetTimer(StatsTimerHandle, this, &APlayerCharacter::DecreaseStats, 2.0f, true);
+
+	// SETS OBJECTIVE WIDGET VALUES TO ZERO ON BOOT
+	if (objWidget)
+	{
+		objWidget->UpdatebuildObj(0.0f);
+		objWidget->UpdatematOBJ(0.0f);
+	}
+
 	
 }
 
@@ -136,6 +144,11 @@ void APlayerCharacter::FindObject()
 					{
 						GiveResources(resourceValue, hitName);
 
+						// ADDS MATERIALS COLLECTED TO TOTAL COLLECTED VALUE FOR OBJECTIVE WIDGET
+						matsCollected = matsCollected + resourceValue;
+
+						objWidget->UpdatematOBJ(matsCollected);
+
 						check(GEngine != nullptr);
 						GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Resource Collected"));
 
@@ -157,6 +170,11 @@ void APlayerCharacter::FindObject()
 	else
 	{
 		isBuilding = false;
+
+		// INCREMENTS OBJECTS BUILT FOR OBJECTIVE WIDGET
+		objectsBuilt = objectsBuilt + 1.0f;
+
+		objWidget->UpdatebuildObj(objectsBuilt);
 	}
 
 }
